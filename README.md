@@ -4,21 +4,21 @@ A multi-asset financial data warehouse built in PostgreSQL, ingesting real marke
 
 ## Overview
 
-This project ingests real market price data across 40 instruments (equities, crypto, FX, fixed income) via the `yfinance` API into a PostgreSQL data warehouse — 11,320 rows of price data in total. It uses pure SQL (window functions and range-overlap joins) to implement a FIFO lot-matching algorithm for realized PnL, consistent with standard brokerage accounting methodology.
+This project ingests real market price data across 40 instruments (equities, crypto, FX, fixed income) via the `yfinance` API into a PostgreSQL data warehouse 11,320 rows of price data in total. It uses pure SQL (window functions and range-overlap joins) to implement a FIFO lot-matching algorithm for realized PnL, consistent with standard brokerage accounting methodology.
 
 ## Tech Stack
 
-- **PostgreSQL** — relational data warehouse
-- **Docker / Docker Compose** — containerized PostgreSQL + pgAdmin
-- **Python** — data ingestion via `yfinance`
-- **SQL** — CTEs, window functions, FIFO lot-matching logic
-- **ReportLab** — automated PDF report generation
+- **PostgreSQL**: relational data warehouse
+- **Docker / Docker Compose**: containerized PostgreSQL + pgAdmin
+- **Python**: data ingestion via `yfinance`
+- **SQL**: CTEs, window functions, FIFO lot-matching logic
+- **ReportLab**: automated PDF report generation
 
 ## How It Works
 
-1. **Ingestion** — Python script pulls historical price data for 40 instruments across equities, crypto, FX, and fixed income via `yfinance`, loading it into PostgreSQL
-2. **FIFO PnL Calculation** — SQL queries using window functions and range-overlap joins match buy/sell lots in First-In-First-Out order to compute realized PnL per trade
-3. **Analytics Queries** — additional SQL using CTEs and window functions calculate:
+1. **Ingestion**: Python script pulls historical price data for 40 instruments across equities, crypto, FX, and fixed income via `yfinance`, loading it into PostgreSQL
+2. **FIFO PnL Calculation**: SQL queries using window functions and range-overlap joins match buy/sell lots in First-In-First-Out order to compute realized PnL per trade
+3. **Analytics Queries**: additional SQL using CTEs and window functions calculate:
    - Unrealized PnL
    - Portfolio exposure by asset class
    Monthly performance tracking (average/peak/trough portfolio value)
